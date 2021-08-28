@@ -5,23 +5,24 @@ function updateTime(){
     var currentMinutes = currentTime.getMinutes()
     var currentSeconds = currentTime.getSeconds()
     //HORA DE NEW YORK
-    var currentHourNY = currentTime.getHours() - 2 
+    var currentHourNY = currentTime.getHours() - 1 
     //HORA DE SYDNEY
     var currentHourSYD = currentTime.getHours() + 13
-
-    currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes 
-    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds
-
-    //var timeOfDay = (currentHours < 12) ? "AM" : "PM"
-    currentHours  = (currentHours > 12) ? currentHours - 12 : currentHours
-    currentHourNY = (currentHourNY > 12) ? currentHourNY - 12 : currentHourNY
-    currentHourSYD = (currentHourSYD > 12) ? currentHourSYD - 24 : currentHourSYD
-    var timeOfDay = (currentHours < 12) ? "AM" : "PM"
-    var timeOfDaySyd = (currentHourSYD < 12) ? "AM" : "PM"
-
-    var currentTimeStringNY = currentHourNY + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay
-    var currentTimeStringRJ = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay
-    var currentTimeStringSYD = currentHourSYD + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDaySyd
+    if(currentHourSYD >= 24){
+        currentHourSYD = 1
+    }
+    else{
+    }
+    if(currentHours < 24){
+        currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes 
+        currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds
+    }
+    else{
+        currentHours = 0
+    }
+    var currentTimeStringNY = currentHourNY + ":" + currentMinutes + ":" + currentSeconds
+    var currentTimeStringRJ = currentHours + ":" + currentMinutes + ":" + currentSeconds
+    var currentTimeStringSYD = currentHourSYD + ":" + currentMinutes + ":" + currentSeconds
     
     document.getElementById("clock").innerHTML = currentTimeStringNY
     document.getElementById("clock2").innerHTML = currentTimeStringRJ
